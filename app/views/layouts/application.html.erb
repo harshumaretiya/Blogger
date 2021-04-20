@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blogger</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <nav>
+    <div class="nav-bar">
+      <ul id="nav-bar-left">
+        <li>
+          <%= link_to "Home", articles_path %>
+        </li>
+        <% if logged_in? %>
+          <li>
+            <%= link_to "Logout", logout_path %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Login", login_path %>
+          </li>
+          <li>
+            <%= link_to "Sign Up", new_author_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <body>
+    <p class="flash">
+      <%= flash.notice %>
+    </p>
+
+    <div id="container">
+      <div id="content">
+        <%= yield %>
+        <hr>
+        <h6>
+          <% if logged_in? %>
+            <%= "Logged in as #{current_user.email}" %>
+          <% end %>
+        </h6>
+      </div>
+    </div>
+  </body>
+
+</html>
